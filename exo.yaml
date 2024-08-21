@@ -1,0 +1,27 @@
+openapi: 3.0.3
+
+info:
+  nom: STD23010 - TD1
+  version: 1.0.0
+server:
+  -url: https://localhost.std23010.com
+paths: 
+  /customers:
+        get:
+            '200':
+              description:
+              content:
+                application/json:
+                          schema: 
+                              type: array
+                              item: 
+                                  $refs: "#/components/schemas/Customer"                                
+components: 
+      schema: 
+          Customer:
+                type: object
+                properties: 
+                        name:
+                              type: string
+                        age: 
+                              type: integer

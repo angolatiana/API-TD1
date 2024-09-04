@@ -1,0 +1,104 @@
+openapi: 3.0.3
+info:
+  title: STD23010 - TD4
+  version: '1.0.2'
+servers:
+  - url: https://localhost.std23010.com
+paths:
+  /order:
+    get:
+      parameters:
+        - in: path
+          name: customerId
+          schema:
+            type: string
+          required: true
+        responses:
+          200:
+            description: List of order for the customers
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Order'
+    
+    post:
+      parameters:
+        - in: path
+          name: customerId
+          schema: 
+            type: string
+          required: true
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCreate'
+      responses:
+        200:
+          description: Order created 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    put: 
+      parameters: 
+        - in: path
+          name: customerId
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: orderId
+          schema: 
+            type: string
+          required: true
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        200: 
+          description: Order updated 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+components:
+  schemas:
+    Order: 
+      type: objet
+      propreties:
+        id:
+          type: string
+        reference:
+          type: string
+        meals:
+          type: array
+          items: 
+            type: object
+            properties:
+              mealId: 
+                type: string
+              quantity:
+                type: integer
+        orderDateTime:
+          type: string
+          format: date-time
+    OrderCreate:
+      type: object
+      properties:
+        reference:
+          type: string
+        meals:
+          type: array
+          items:
+            type: object
+            properties: 
+              mealId:
+                type: string
+              quantity:
+                type: integer
+        orderDateTime:
+          type: string
+          format: date-time

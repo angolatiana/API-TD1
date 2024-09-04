@@ -4,7 +4,7 @@ info:
   nom: STD23010 - TD1
   version: 1.0.0
 server:
-  -url: https://localhost.std23010.com
+  -url: https://localhost.STD23010.com
 paths: 
   /customers:
         get:

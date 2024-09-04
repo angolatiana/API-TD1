@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: STD23010 - TD5
+  version: '1.0.2'
+servers:
+  - url: https://localhost.std23010.com
+
+paths:
+  /customers/{id}:
+    patch:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                age:
+                  type: integer
+      responses:
+        200:
+          description: Customer updated 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+  /meals/{id}:
+    patch:
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                  format: decimal
+      responses:
+        200:
+          description: Meal updated 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meal'
+  /customers/{id}:
+    put:
+      summary: Completely update customer
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        200:
+          description: Customer updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+  /meals/{id}:
+    put:
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Meal'
+      responses:
+        200:
+          description: Meal updated 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meal'
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        age:
+          type: integer
+    Meal:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+          format: decimal
